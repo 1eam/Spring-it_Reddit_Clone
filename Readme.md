@@ -4,13 +4,13 @@ My first mvc project to kick me off
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of this project up and running on your local machine. Documentation is still under construction
 
 ### Prerequisites
 
 The things you need to install to get the Spring-it application running:
 Up to this moment you'll need Java installed and your prevered IDE.
-Also you need to have a mavan wrapper. Thats all. This project is built with Spring boot, therefore actually looking up the plugins is not needed.
+Also you need to have a mavan wrapper. Thats all. This project is built with Spring boot, therefore actually looking up the plugins is not needed. [Further documentation is still under construction]
 ```
 
 ### Installing
