@@ -46,6 +46,7 @@ public class SpringitApplication {
             commentRepository.save(comment3);
             link3.addComment(comment3);
 
+            
             // My request:
             Link gettingFacebookLink = linkRepository.findByTitle("Biased Social Media");
             //Calling my actual get Method &//Just printing result to console. Instead I could save it as a string & use it in my html
