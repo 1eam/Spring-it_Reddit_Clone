@@ -2,14 +2,11 @@ package com.vega.springit.controller;
 
 
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
-@RestController
+@Controller
 public class HomeController {
 
 //    @RequestMapping("/")
@@ -18,10 +15,10 @@ public class HomeController {
 //    }
 //
 
-    @GetMapping("/")
-    public String hello(Model model, HttpServletRequest request) {
-        model.addAttribute("message", "Hello World!");
-        return "index, but not html please";
+    @GetMapping("/home")
+    public String hello(Model model) {
+        model.addAttribute("title", "Hello Tymeleaf! - heres where i can pass my dynamic content");
+        return "home";
     }
 
 }
