@@ -14,7 +14,7 @@ public class LinkController {
 
     @GetMapping("/foo")
     public String foo (Model model){
-        model.addAttribute("pageTitle", "Temporary Value This is page FOO");
+        model.addAttribute("pageTitle", "Temporary Value.. This is page FOO");
         return "foo";
     }
 }
