@@ -45,6 +45,13 @@ public class User implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
+    public void addRole(Role role){
+        roles.add(role);
+    }
+
+    public void addRoles(Set<Role> roles){
+        roles.forEach(this::addRole);
+    }
 
 /*Methods overriding*/
 
