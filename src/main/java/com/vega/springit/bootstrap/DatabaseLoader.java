@@ -60,6 +60,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
     private void addUsersAndRoles() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        //our password , stored in a variable
         String secret = "{bcrypt}" + encoder.encode("password");
 
         Role userRole = new Role("ROLE_USER");
