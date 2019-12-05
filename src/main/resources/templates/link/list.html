@@ -37,7 +37,7 @@
 
 </div>
 
-<script sec:authorize="isFullyAuthenticated()>
+<script>
     const allvotes = document.querySelectorAll(".upvote, .downvote");
     for(let i=0; i<allvotes.length; i++) {
         let className = allvotes[i].className;
@@ -48,8 +48,8 @@
             const voteSumValue = voteSum.innerHTML;
             fetch(`http://localhost:8080/vote/link/${linkID}/direction/${direction}/votecount/${voteSumValue}`)
                 .then(response => response.json())
-        .then(data => voteSum.innerHTML = data)
-        .catch(err => console.error(err));
+                .then(data => voteSum.innerHTML = data)
+                .catch(err => console.error(err));
         });
     }
 </script>
