@@ -36,7 +36,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
             .logout()
                 .and()
-            .rememberMe();
+            .rememberMe()
+                //helpt h2 openstaan
+                .and()
+                .csrf().disable()
+                .headers().frameOptions().disable();
     }
 
     @Override
