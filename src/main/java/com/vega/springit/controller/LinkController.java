@@ -89,7 +89,7 @@ public class LinkController {
             logger.info("There was a problem adding a new comment");
         } else {
             commentRepository.save(comment);
-            logger.info("New commeny was saved successfully");
+            logger.info("New comment as saved successfully");
         }
             return "redirect:/link/" + comment.getLink().getId();
 
