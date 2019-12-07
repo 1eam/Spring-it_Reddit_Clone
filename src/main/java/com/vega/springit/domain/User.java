@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -36,7 +37,6 @@ public class User implements UserDetails {
     private boolean enabled;
 
 /*Relationship*/
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
@@ -53,8 +53,31 @@ public class User implements UserDetails {
         roles.forEach(this::addRole);
     }
 
-/*Methods overriding*/
+    @NonNull
+    @NotEmpty(message = "You must enter First Name.")
+    private String firstName;
 
+    @NonNull
+    @NotEmpty(message = "You must enter Last Name.")
+    private String lastName;
+
+    //Derrived propersy (combined)
+    @Transient //This annotation tells us to not (initially) store this in the DB. Were going to combine the Firstname entry with the Lastname and therefore only going to use a get
+    @Setter(AccessLevel.NONE)
+    private String fullName;
+
+    //Users might not want to dislplay their first&lastname or emailaddres on their post. So instead of this we'll let them choose their "username"
+    @NonNull
+    @NotEmpty(message = "Please enter alias.")
+    @Column(nullable = false, unique = true)
+    private String alias;
+
+    //Get First & Lastname & Combine
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+/* User Details Methods overriding*/
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
