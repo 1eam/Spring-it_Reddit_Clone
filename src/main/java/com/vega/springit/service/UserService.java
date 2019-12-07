@@ -31,7 +31,7 @@ public class UserService {
         for(User user : users){
             logger.info("Saving user: " + user.getEmail());
             try {
-                userRepository.save(user)
+                userRepository.save(user);
             } catch (Exception e){
                 //  rollback transaction
             }
