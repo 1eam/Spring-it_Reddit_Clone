@@ -17,22 +17,35 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User register(User user){
+    public User register(User user) {
+        //Take the password from the form and encode it
+
+        //Assign a Role to this user
+
+        //Set an activation code
+
+        //Disable the user
+
+        //save user
+
+        //send the activation email
+
+        //return the user
         return user;
     }
 
-    public User save(User user){
+    public User save(User user) {
         return userRepository.save(user);
     }
 
     @Transactional /*This annotation takes care of the The messages described in the comments below */
-    public void saveUsers(User... users){
+    public void saveUsers(User... users) {
         //  begin transaction
-        for(User user : users){
+        for (User user : users) {
             logger.info("Saving user: " + user.getEmail());
             try {
                 userRepository.save(user);
-            } catch (Exception e){
+            } catch (Exception e) {
                 //  rollback transaction
             }
         }

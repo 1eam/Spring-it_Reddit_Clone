@@ -25,7 +25,7 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "auth/login";
     }
 
@@ -36,13 +36,14 @@ public class AuthController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("user",new User());
+        model.addAttribute("user", new User());
         model.addAttribute("success", false);
         return "auth/register";
     }
+
     @PostMapping("/register")
-    public String registerNewUser(@Valid User user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
-        if(bindingResult.hasErrors()){
+    public String registerNewUser(@Valid User user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
             // show validation errors
             logger.info("Validation errors were found while registering a new user");
             model.addAttribute("user", user);
@@ -51,6 +52,10 @@ public class AuthController {
 
         } else {
             // Register new user
+            User newUser = userService.register(user);
+            redirectAttributes
+                    .addAttribute("id", newUser.getId())
+                    .addFlashAttribute("success", true);
         }
         return null;
     }
