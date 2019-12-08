@@ -4,6 +4,7 @@ import com.vega.springit.domain.User;
 import com.vega.springit.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,23 +13,34 @@ import javax.transaction.Transactional;
 public class UserService {
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder encoder;
+    private final RoleService roleService;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleService roleService) {
         this.userRepository = userRepository;
+        this.roleService = roleService;
+        encoder = new BCryptPasswordEncoder();
     }
 
     public User register(User user) {
         //Take the password from the form and encode it
+        String secret = "{bcrypt}" + encoder.encode(user.getPassword());
+        user.setPassword(secret);
+
+        //Confirm Password
 
         //Assign a Role to this user
+        user.addRole(roleService.findByName("ROLE_USER"));
 
         //Set an activation code
 
         //Disable the user
 
         //save user
+        save(user);
 
         //send the activation email
+        sendActivationEmail(user);
 
         //return the user
         return user;
@@ -50,5 +62,9 @@ public class UserService {
             }
         }
         // commit Transaction
+    }
+
+    public void  sendActivationEmail(User user){
+        // ... do something
     }
 }
