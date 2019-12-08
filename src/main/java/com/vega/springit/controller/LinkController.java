@@ -6,6 +6,7 @@ import com.vega.springit.service.CommentService;
 import com.vega.springit.service.LinkService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -77,16 +78,16 @@ public class LinkController {
         }
     }
 
+    @Secured({"ROLE_USER"})
     @PostMapping("/link/comments")
     public String addComment(@Valid Comment comment, BindingResult bindingResult){
-        if (bindingResult.hasErrors() ){
-            logger.info("There was a problem adding a new comment");
+        if( bindingResult.hasErrors() ){
+            logger.info("There was a problem adding a new comment.");
         } else {
             commentService.save(comment);
-            logger.info("New comment as saved successfully");
+            logger.info("New comment was saved successfully.");
         }
-            return "redirect:/link/" + comment.getLink().getId();
-
+        return "redirect:/link/" + comment.getLink().getId();
     }
 
 
