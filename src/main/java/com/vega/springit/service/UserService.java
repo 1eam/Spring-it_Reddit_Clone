@@ -28,6 +28,7 @@ public class UserService {
         user.setPassword(secret);
 
         //Confirm Password
+        user.setConfirmPassword(secret);
 
         //Assign a Role to this user
         user.addRole(roleService.findByName("ROLE_USER"));
@@ -35,6 +36,7 @@ public class UserService {
         //Set an activation code
 
         //Disable the user
+        user.setEnabled(false);
 
         //save user
         save(user);

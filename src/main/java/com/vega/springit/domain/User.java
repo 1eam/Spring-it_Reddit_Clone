@@ -1,6 +1,7 @@
 package com.vega.springit.domain;
 
 
+import com.vega.springit.domain.validator.PasswordsMatch;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @Setter
 @ToString
 @NoArgsConstructor
+@PasswordsMatch
 public class User implements UserDetails {
 
     @Id @GeneratedValue
@@ -31,6 +33,10 @@ public class User implements UserDetails {
     @NonNull
     @Column(length = 100)
     private String password;
+
+    @Transient
+    @NotEmpty(message = "Please enter confirm password field")
+    private String confirmPassword;
 
     @NonNull
     @Column(nullable = false)
