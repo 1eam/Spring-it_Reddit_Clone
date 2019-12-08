@@ -8,4 +8,6 @@ import java.util.Optional;
 //pass me an email
 public interface UserRepository extends JpaRepository<User,Long> {
     Optional<User> findByEmail(String email);
+
+    Optional<User> findByEmailAndActivationCode(String email, String activationCode);
 }

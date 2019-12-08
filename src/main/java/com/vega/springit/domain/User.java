@@ -26,7 +26,7 @@ public class User implements UserDetails {
     private Long id;
 
     @NonNull
-    @Size (min = 8, max = 20)
+    @Size (min = 10, max = 50)
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -37,6 +37,9 @@ public class User implements UserDetails {
     @Transient
     @NotEmpty(message = "Please enter confirm password field")
     private String confirmPassword;
+
+    private String activationCode;
+
 
     @NonNull
     @Column(nullable = false)
